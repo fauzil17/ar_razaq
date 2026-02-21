@@ -1,0 +1,568 @@
+/* ====== GENERAL STYLES ====== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* ====== NAVBAR STYLES (Bootstrap) ====== */
+.navbar {
+    background-color: #2563eb !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.3rem;
+    transition: opacity 0.3s ease;
+}
+
+.navbar-brand:hover {
+    opacity: 0.8;
+}
+
+.navbar-brand img {
+    border-radius: 50%;
+}
+
+.navbar-nav .nav-link {
+    margin: 0 1.2rem;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    padding-left: 0 0.2rem !important;
+    padding-right: 0 0.2rem !important;
+    color: white !important;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    background-color: rgba(37, 99, 235, 0.3);
+    color: #93c5fd !important;
+}
+
+
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #1e3a8a;
+}
+
+.dropdown-item {
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.dropdown-item:hover {
+    background-color: #2563eb;
+    color: white;
+}
+
+/* bagian dropdown kas menu kas */
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu > .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-left: .1rem;
+    display: none;
+}
+
+.dropdown-submenu:hover > .dropdown-menu {
+    display: block;
+}
+
+
+/* ====== HERO SECTION ====== */
+.hero {
+    /* background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); */
+    color: white;
+    padding: 100px 20px;
+    text-align: center;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: slideDown 0.6s ease;
+    color: black;
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    animation: slideUp 0.6s ease 0.2s both;
+    color: black;
+    padding-bottom: 20px;
+}
+
+.hero-content a.btn-primary {
+    font-size: 17px;
+    padding: 12px 20px;
+    /* animation: slideUp 0.6s ease 0.4s both; */
+}
+
+/* ====== BUTTONS ====== */
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+}
+
+.btn-read {
+    color: #1e3a8a;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-read:hover {
+    color: #2563eb;
+}
+
+/* ====== SECTION JADWAL SHOLAT ====== */
+.jadwal-sholat {
+    background-color: #f0f9ff;
+    padding: 60px 20px;
+}
+
+.jadwal-sholat h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #1e3a8a;
+}
+
+.prayer-times {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+}
+
+.prayer-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 4px solid #2563eb;
+}
+
+.prayer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
+}
+
+.prayer-card h3 {
+    color: #1e3a8a;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.prayer-card .time {
+    font-size: 2rem;
+    color: #2563eb;
+    font-weight: bold;
+}
+
+/* ====== BERITA SECTION ====== */
+.berita {
+    padding: 60px 20px;
+}
+
+.berita h2,
+.kegiatan h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #1e3a8a;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.news-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 4px solid #2563eb;
+}
+
+.news-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
+}
+
+.news-card h3 {
+    padding: 1.5rem 1.5rem 0.5rem;
+    color: #1e3a8a;
+    font-size: 1.3rem;
+}
+
+.news-card .date {
+    padding: 0 1.5rem;
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.news-card p {
+    padding: 1rem 1.5rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+.news-card .btn-read {
+    display: inline-block;
+    padding: 0 1.5rem 1.5rem;
+}
+
+/* ====== KEGIATAN SECTION ====== */
+.kegiatan {
+    background-color: #f0f9ff;
+    padding: 60px 20px;
+}
+
+.activity-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.activity-item {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.activity-item:hover {
+    transform: translateY(-5px);
+}
+
+.activity-icon {
+    font-size: 3rem;
+    color: #2563eb;
+    margin-bottom: 1rem;
+}
+
+.activity-item h3 {
+    color: #1e3a8a;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.activity-item p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* ====== CTA DONASI SECTION ====== */
+.cta-donasi {
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.cta-donasi h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.cta-donasi p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+/* ====== FOOTER ====== */
+footer {
+    background-color: #0f172a;
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    border-top: 3px solid #2563eb;
+}
+
+/* ====== SECTION TITLE ====== */
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #1e3a8a;
+    margin-top: 2rem;
+}
+
+/* ====== BREADCRUMB ====== */
+.breadcrumb {
+    background-color: transparent;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #e0e7ff;
+}
+
+.breadcrumb-item a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.breadcrumb-item a:hover {
+    color: #1e3a8a;
+    text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+    color: #1e3a8a;
+    font-weight: 600;
+}
+
+/* ====== PROFIL SECTION ====== */
+.profil-section {
+    padding: 60px 20px;
+}
+
+.profil-section h2 {
+    color: #1e3a8a;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+
+.profil-section p {
+    color: #666;
+    line-height: 1.8;
+}
+
+.profil-section .list-group-item {
+    border-left: 4px solid #2563eb;
+}
+
+.profil-section .card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* ====== JADWAL DETAIL SECTION ====== */
+.jadwal-section {
+    padding: 60px 20px;
+    background-color: #f0f9ff;
+}
+
+.jadwal-section h2 {
+    color: #1e3a8a;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+
+.jadwal-section .card {
+    border: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-top: 3px solid #2563eb;
+}
+
+/* ====== KEGIATAN DETAIL SECTION ====== */
+.kegiatan-section {
+    padding: 60px 20px;
+}
+
+.kegiatan-section .card {
+    border: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 4px solid #2563eb;
+}
+
+.kegiatan-section .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.15);
+}
+
+.kegiatan-section i {
+    margin-bottom: 1rem;
+    color: #2563eb;
+}
+
+/* ====== BERITA DETAIL SECTION ====== */
+.berita-section {
+    padding: 60px 20px;
+    background-color: #f0f9ff;
+}
+
+.berita-section .card {
+    border: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    border-left: 4px solid #2563eb;
+}
+
+.berita-section .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.15);
+}
+
+.berita-section .card-title {
+    color: #1e3a8a;
+    font-weight: bold;
+}
+
+.berita-section .card-text {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* ====== GALERI SECTION ====== */
+.galeri-section {
+    padding: 60px 20px;
+}
+
+.galeri-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.galeri-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
+}
+
+.galeri-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+}
+
+.galeri-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(30, 58, 138, 0.9), transparent);
+    color: white;
+    padding: 20px 15px 15px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.galeri-item:hover .galeri-caption {
+    transform: translateY(0);
+}
+
+.galeri-caption h5 {
+    margin: 0 0 5px 0;
+    font-weight: bold;
+}
+
+.galeri-caption p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.social-links {
+    margin-top: 2rem;
+}
+
+/* ====== ANIMATIONS ====== */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ====== RESPONSIVE / MOBILE ====== */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .prayer-times {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .news-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .navbar-nav .nav-link {
+        margin: 0 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .prayer-times {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+}
+
+
+
