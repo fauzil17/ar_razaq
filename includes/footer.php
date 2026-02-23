@@ -5,7 +5,7 @@
     </div>
 </footer>
 
-<script src="assets/bootstrap/js/bootstrap.js"></script>
+<!-- <script src="assets/bootstrap/js/bootstrap.js"></script>
     <script src="assets/bootstrap/js/bootstrap.js.map"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js.map"></script>
@@ -15,4 +15,4 @@
     <script src="" "assets/bootstrap/js/bootstrap-grip.min.js.map"></script>
     <script src="" "assets/bootstrap/js/bootstrap-grip-rtl.js"></script>
 
-<script src="">
+<script src=""> -->
