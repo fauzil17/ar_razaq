@@ -70,11 +70,6 @@ $base_path = rtrim($base_path, '/\\');
                         Input Kas Jum'at
                     </a>
                 </li>
-                <li>
-                    <a class="dropdown-item" href="<?php echo $base_path; ?>/pages/kas-laporan.php">
-                        Laporan
-                    </a>
-                </li>
             </ul>
         </li>
 

@@ -91,7 +91,11 @@ session_start();
                 <p>Untuk melihat dokumentasi kegiatan masjid yang lebih lengkap, Anda bisa mengunjungi media sosial kami.</p>
                 <div class="social-links">
                     <a href="#" class="btn btn-info btn-sm me-2"><i class="fab fa-facebook"></i> Facebook</a>
-                    <a href="#" class="btn btn-info btn-sm me-2"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a href="https://www.instagram.com/masjidarrazzaqgeliting/" 
+                              class="btn btn-info btn-sm me-2" 
+                              target="_blank">
+                             <i class="fab fa-instagram"></i> Instagram
+                    </a>
                     <a href="#" class="btn btn-info btn-sm"><i class="fab fa-youtube"></i> YouTube</a>
                 </div>
             </div>
