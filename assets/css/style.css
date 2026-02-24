@@ -1,510 +1,519 @@
+/* ====== IMPORT FONTS ====== */
+/* Fallback Google Fonts for Sakkal Majalla and Alhambra */
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@300;400;600;700&family=Aref+Ruqaa:wght@400;700&display=swap');
+
+/* ====== CSS VARIABLES ====== */
+:root,
+[data-bs-theme="light"],
+[data-bs-theme="dark"] {
+    /* Mencegah konflik dark mode Bootstrap dengan memaksa variabel kita */
+    --bs-body-bg: #f8fafc;
+    --bs-body-color: #334155;
+
+    /* Soft Blue Modern Palette */
+    --primary-color: #3b82f6;
+    /* Blue 500 */
+    --primary-light: #60a5fa;
+    /* Blue 400 */
+    --primary-dark: #2563eb;
+    /* Blue 600 */
+    --secondary-color: #0ea5e9;
+    /* Sky 500 */
+    --accent-color: #f59e0b;
+    /* Amber/Gold for contrast */
+    --bg-color: #f8fafc;
+    /* Slate 50 - Very soft cold white */
+    --card-bg: #ffffff;
+    --text-main: #334155;
+    /* Slate 700 */
+    --text-muted: #64748b;
+    /* Slate 500 */
+    --navbar-bg: #3b82f6;
+    /* Soft blue navbar */
+    --dropdown-bg: #1e3a8a;
+    /* Darker blue for dropdown as per image */
+    --dropdown-hover: #3b82f6;
+    --border-color: #e2e8f0;
+    /* Slate 200 */
+}
+
 /* ====== GENERAL STYLES ====== */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
+    background-color: var(--bg-color) !important;
+    color: var(--text-main) !important;
+    /* Menggunakan Sakkal Majalla jika ada, fallback ke Amiri (Arabic style) atau Outfit */
+    font-family: 'Sakkal Majalla', 'Amiri', 'Outfit', sans-serif;
+    font-size: 1rem;
+    /* Diperkecil dari 1.1rem agar lebih enak dilihat */
     line-height: 1.6;
 }
 
-/* ====== NAVBAR STYLES (Bootstrap) ====== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.text-white h1,
+.text-white h2,
+.text-white h3,
+.text-white h4,
+.text-white h5,
+.text-white h6,
+.bg-primary h1,
+.bg-primary h2,
+.bg-primary h3,
+.bg-primary h4,
+.bg-primary h5,
+.bg-primary h6,
+.bg-success h1,
+.bg-success h2,
+.bg-success h3,
+.bg-success h4,
+.bg-success h5,
+.bg-success h6,
+.bg-danger h1,
+.bg-danger h2,
+.bg-danger h3,
+.bg-danger h4,
+.bg-danger h5,
+.bg-danger h6 {
+    color: #ffffff !important;
+}
+
+/* Memastikan background form input dan table tetap contrast */
+.form-control,
+.form-select {
+    background-color: #ffffff !important;
+    color: #334155 !important;
+    border: 1px solid #cbd5e1 !important;
+}
+
+.table {
+    color: var(--text-main) !important;
+    background-color: #ffffff !important;
+}
+
+.table th {
+    background-color: var(--primary-color) !important;
+    color: #ffffff !important;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+    background-color: rgba(59, 130, 246, 0.05) !important;
+    color: var(--text-main) !important;
+}
+
+.table-hover>tbody>tr:hover>* {
+    background-color: rgba(59, 130, 246, 0.1) !important;
+    color: var(--text-main) !important;
+}
+
+/* ====== NAVBAR STYLES ====== */
 .navbar {
-    background-color: #2563eb !important;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: var(--navbar-bg) !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    padding: 0.5rem 0;
+    /* Diperkecil paddingnya */
 }
 
 .navbar-brand {
-    font-weight: bold;
-    font-size: 1.3rem;
+    font-weight: 700;
+    font-size: 1.4rem;
+    /* Diperkecil */
     transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    color: white !important;
+    margin-left: 1rem;
+}
+
+/* Typography untuk nama masjid "ar razaq" dengan font Alhambra */
+.masjid-name {
+    font-family: 'Alhambra', 'Aref Ruqaa', cursive;
+    letter-spacing: 1px;
+    margin-left: 10px;
+    font-size: 1.6rem;
+    /* Diperkecil proporsional */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    /* Mengubah ar razaq huruf kecil semua sesuai instruksi */
+    text-transform: lowercase;
 }
 
 .navbar-brand:hover {
-    opacity: 0.8;
-}
-
-.navbar-brand img {
-    border-radius: 50%;
+    opacity: 0.9;
 }
 
 .navbar-nav .nav-link {
-    margin: 0 1.2rem;
+    margin: 0 0.5rem;
+    /* Margin diperkecil sedikit */
     transition: all 0.3s ease;
-    border-radius: 4px;
-    padding-left: 0 0.2rem !important;
-    padding-right: 0 0.2rem !important;
+    border-radius: 6px;
+    padding: 0.5rem 0.8rem !important;
+    /* Padding diperkecil */
     color: white !important;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    /* Font size spesifik navbar */
 }
 
-.navbar-dark .navbar-nav .nav-link:hover {
-    background-color: rgba(37, 99, 235, 0.3);
-    color: #93c5fd !important;
+.navbar-nav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
 }
 
-
+/* Dropdown Navbar */
 .dropdown-menu {
     border: none;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #1e3a8a;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    background-color: var(--dropdown-bg);
+    border-radius: 8px;
+    padding: 0.5rem 0;
+    margin-top: 5px;
+    /* Margin top diperkecil */
 }
 
 .dropdown-item {
-    transition: all 0.3s ease;
-    color: white;
+    transition: all 0.2s ease;
+    color: white !important;
+    /* Pastikan selalu putih */
+    padding: 0.5rem 1.5rem;
+    /* Padding dropdown item diperkecil */
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
 }
 
-.dropdown-item:hover {
-    background-color: #2563eb;
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: var(--dropdown-hover);
     color: white;
+    padding-left: 2rem;
+    /* Sliding effect on hover */
 }
 
-/* bagian dropdown kas menu kas */
+/* bagian dropdown multilevel menu kas */
 .dropdown-submenu {
     position: relative;
 }
 
-.dropdown-submenu > .dropdown-menu {
+.dropdown-submenu>.dropdown-menu {
     top: 0;
     left: 100%;
-    margin-left: .1rem;
+    margin-left: 0.5rem;
     display: none;
 }
 
-.dropdown-submenu:hover > .dropdown-menu {
+.dropdown-submenu:hover>.dropdown-menu {
     display: block;
+    animation: fadeIn 0.3s ease;
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 /* ====== HERO SECTION ====== */
 .hero {
-    /* background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); */
+    background: linear-gradient(rgba(59, 130, 246, 0.8), rgba(30, 58, 138, 0.9)), url('../images/masjid.jpg') no-repeat center center/cover;
     color: white;
-    padding: 100px 20px;
+    padding: 120px 20px;
     text-align: center;
-    min-height: 400px;
+    min-height: 50vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    border-bottom: 5px solid var(--accent-color);
 }
 
 .hero-content h1 {
-    font-size: 3rem;
+    font-size: 3.5rem;
     margin-bottom: 1rem;
     animation: slideDown 0.6s ease;
-    color: black;
+    color: white;
+    font-family: 'Sakkal Majalla', 'Amiri', serif;
 }
 
 .hero-content p {
-    font-size: 1.3rem;
-    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    margin-bottom: 2.5rem;
     animation: slideUp 0.6s ease 0.2s both;
-    color: black;
-    padding-bottom: 20px;
-}
-
-.hero-content a.btn-primary {
-    font-size: 17px;
-    padding: 12px 20px;
-    /* animation: slideUp 0.6s ease 0.4s both; */
+    color: #f1f5f9;
 }
 
 /* ====== BUTTONS ====== */
 .btn {
-    display: inline-block;
-    padding: 12px 30px;
-    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 24px;
+    border-radius: 8px;
     text-decoration: none;
-    font-weight: bold;
-    transition: all 0.3s ease;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
     border: none;
-    font-size: 1rem;
 }
 
 .btn-primary {
-    background-color: #2563eb;
+    background-color: var(--primary-color);
     color: white;
-    border: none;
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.4);
 }
 
 .btn-primary:hover {
-    background-color: #1d4ed8;
+    background-color: var(--primary-dark);
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+    box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.5);
 }
 
-.btn-read {
-    color: #1e3a8a;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
+.btn-success {
+    background-color: #10b981;
 }
 
-.btn-read:hover {
-    color: #2563eb;
+.btn-warning {
+    background-color: var(--accent-color);
+    color: white;
 }
 
 /* ====== SECTION JADWAL SHOLAT ====== */
 .jadwal-sholat {
-    background-color: #f0f9ff;
-    padding: 60px 20px;
+    background-color: var(--bg-color);
+    padding: 80px 20px;
+    position: relative;
 }
 
-.jadwal-sholat h2 {
+/* Ornamen Islami Latar Belakang (Contoh pseudo-element) */
+.jadwal-sholat::before {
+    content: "\f66f";
+    /* moskque icon font awesome url/string */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20rem;
+    opacity: 0.03;
+    pointer-events: none;
+    color: var(--primary-color);
+}
+
+.section-title,
+.jadwal-sholat h2,
+.berita h2,
+.kegiatan h2,
+.cta-donasi h2 {
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     margin-bottom: 3rem;
-    color: #1e3a8a;
+    color: var(--primary-dark);
+    font-family: 'Sakkal Majalla', 'Amiri', serif;
+    position: relative;
+    z-index: 1;
 }
 
 .prayer-times {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1.5rem;
+    position: relative;
+    z-index: 1;
 }
 
 .prayer-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
+    background: var(--card-bg);
+    padding: 2rem 1rem;
+    border-radius: 12px;
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-top: 4px solid #2563eb;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border-top: 5px solid var(--primary-color);
+    border-bottom: 5px solid transparent;
 }
 
 .prayer-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.15);
+    border-bottom: 5px solid var(--accent-color);
 }
 
 .prayer-card h3 {
-    color: #1e3a8a;
+    color: var(--text-muted);
     margin-bottom: 1rem;
     font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .prayer-card .time {
-    font-size: 2rem;
-    color: #2563eb;
-    font-weight: bold;
-}
-
-/* ====== BERITA SECTION ====== */
-.berita {
-    padding: 60px 20px;
-}
-
-.berita h2,
-.kegiatan h2 {
-    text-align: center;
     font-size: 2.5rem;
-    margin-bottom: 3rem;
-    color: #1e3a8a;
+    color: var(--primary-dark);
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+    margin: 0;
 }
 
-.news-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.news-card {
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-left: 4px solid #2563eb;
-}
-
-.news-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
-}
-
-.news-card h3 {
-    padding: 1.5rem 1.5rem 0.5rem;
-    color: #1e3a8a;
-    font-size: 1.3rem;
-}
-
-.news-card .date {
-    padding: 0 1.5rem;
-    color: #999;
-    font-size: 0.9rem;
-}
-
-.news-card p {
-    padding: 1rem 1.5rem;
-    color: #666;
-    line-height: 1.6;
-}
-
-.news-card .btn-read {
-    display: inline-block;
-    padding: 0 1.5rem 1.5rem;
-}
-
-/* ====== KEGIATAN SECTION ====== */
-.kegiatan {
-    background-color: #f0f9ff;
-    padding: 60px 20px;
-}
-
+/* ====== CARDS (Berita & Kegiatan) ====== */
+.news-grid,
 .activity-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
 }
 
-.activity-item {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+.news-card,
+.activity-item,
+.card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
 }
 
+.card-header {
+    background-color: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1.5rem;
+    font-weight: 600;
+}
+
+.news-card:hover,
 .activity-item:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.1);
+    border-color: var(--primary-light);
+}
+
+.news-card h3,
+.activity-item h3 {
+    padding: 1.5rem 1.5rem 0.5rem;
+    color: var(--primary-dark);
+    font-size: 1.5rem;
 }
 
 .activity-icon {
-    font-size: 3rem;
-    color: #2563eb;
-    margin-bottom: 1rem;
+    font-size: 3.5rem;
+    color: var(--secondary-color);
+    margin: 2rem 0 1rem;
+    transition: transform 0.3s ease;
 }
 
-.activity-item h3 {
-    color: #1e3a8a;
-    margin-bottom: 0.5rem;
-    font-size: 1.3rem;
-}
-
-.activity-item p {
-    color: #666;
-    line-height: 1.6;
+.activity-item:hover .activity-icon {
+    transform: scale(1.1);
+    color: var(--primary-color);
 }
 
 /* ====== CTA DONASI SECTION ====== */
 .cta-donasi {
-    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
     color: white;
-    padding: 60px 20px;
+    padding: 80px 20px;
     text-align: center;
+    border-radius: 20px;
+    margin: 40px auto;
+    max-width: 90%;
+    box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.5);
 }
 
 .cta-donasi h2 {
-    font-size: 2.5rem;
+    color: white;
     margin-bottom: 1rem;
 }
 
-.cta-donasi p {
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
+.cta-donasi .btn-primary {
+    background-color: white;
+    color: var(--primary-dark);
+    font-size: 1.2rem;
+    padding: 15px 35px;
+}
+
+.cta-donasi .btn-primary:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+/* ====== DATATABLES CUSTOMIZATION ====== */
+table.dataTable.table-striped>tbody>tr:nth-of-type(2n+1)>* {
+    box-shadow: inset 0 0 0 9999px rgba(59, 130, 246, 0.03);
+}
+
+table.dataTable thead th {
+    background-color: var(--primary-color);
+    color: white;
+    border-bottom: none;
+    padding: 15px 10px;
+}
+
+table.dataTable {
+    border-collapse: collapse !important;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 /* ====== FOOTER ====== */
 footer {
     background-color: #0f172a;
-    color: white;
-    padding: 2rem;
+    /* Slate 900 */
+    color: #cbd5e1;
+    padding: 3rem 2rem;
     text-align: center;
-    border-top: 3px solid #2563eb;
+    border-top: 5px solid var(--primary-color);
 }
 
-/* ====== SECTION TITLE ====== */
-.section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-    color: #1e3a8a;
-    margin-top: 2rem;
-}
-
-/* ====== BREADCRUMB ====== */
-.breadcrumb {
-    background-color: transparent;
-    padding: 1rem 0;
-    margin-bottom: 2rem;
-    border-bottom: 2px solid #e0e7ff;
-}
-
-.breadcrumb-item a {
-    color: #2563eb;
+footer a {
+    color: var(--primary-light);
     text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s ease;
 }
 
-.breadcrumb-item a:hover {
-    color: #1e3a8a;
-    text-decoration: underline;
-}
-
-.breadcrumb-item.active {
-    color: #1e3a8a;
-    font-weight: 600;
-}
-
-/* ====== PROFIL SECTION ====== */
-.profil-section {
-    padding: 60px 20px;
-}
-
-.profil-section h2 {
-    color: #1e3a8a;
-    margin-bottom: 1.5rem;
-    font-weight: bold;
-}
-
-.profil-section p {
-    color: #666;
-    line-height: 1.8;
-}
-
-.profil-section .list-group-item {
-    border-left: 4px solid #2563eb;
-}
-
-.profil-section .card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-/* ====== JADWAL DETAIL SECTION ====== */
-.jadwal-section {
-    padding: 60px 20px;
-    background-color: #f0f9ff;
-}
-
-.jadwal-section h2 {
-    color: #1e3a8a;
-    margin-bottom: 1.5rem;
-    font-weight: bold;
-}
-
-.jadwal-section .card {
-    border: none;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    border-top: 3px solid #2563eb;
-}
-
-/* ====== KEGIATAN DETAIL SECTION ====== */
-.kegiatan-section {
-    padding: 60px 20px;
-}
-
-.kegiatan-section .card {
-    border: none;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-left: 4px solid #2563eb;
-}
-
-.kegiatan-section .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.15);
-}
-
-.kegiatan-section i {
-    margin-bottom: 1rem;
-    color: #2563eb;
-}
-
-/* ====== BERITA DETAIL SECTION ====== */
-.berita-section {
-    padding: 60px 20px;
-    background-color: #f0f9ff;
-}
-
-.berita-section .card {
-    border: none;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 100%;
-    border-left: 4px solid #2563eb;
-}
-
-.berita-section .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.15);
-}
-
-.berita-section .card-title {
-    color: #1e3a8a;
-    font-weight: bold;
-}
-
-.berita-section .card-text {
-    color: #666;
-    line-height: 1.6;
-}
-
-/* ====== GALERI SECTION ====== */
-.galeri-section {
-    padding: 60px 20px;
-}
-
-.galeri-item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.galeri-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
-}
-
-.galeri-item img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    display: block;
-}
-
-.galeri-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(30, 58, 138, 0.9), transparent);
+footer a:hover {
     color: white;
-    padding: 20px 15px 15px;
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
 }
 
-.galeri-item:hover .galeri-caption {
-    transform: translateY(0);
+/* ====== CUSTOM SCROLLBAR ====== */
+::-webkit-scrollbar {
+    width: 8px;
+    /* Lebih ramping */
 }
 
-.galeri-caption h5 {
-    margin: 0 0 5px 0;
-    font-weight: bold;
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
 }
 
-.galeri-caption p {
-    margin: 0;
-    font-size: 0.9rem;
-    opacity: 0.9;
+::-webkit-scrollbar-thumb {
+    background: var(--primary-light);
+    border-radius: 4px;
 }
 
-.social-links {
-    margin-top: 2rem;
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
 }
 
-/* ====== ANIMATIONS ====== */
+/* ====== ANIMASI GLOBAL ====== */
 @keyframes slideDown {
     from {
         opacity: 0;
         transform: translateY(-30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -516,16 +525,55 @@ footer {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-/* ====== RESPONSIVE / MOBILE ====== */
+/* ====== RESPONSIVE & MOBILE UX ====== */
+@media (max-width: 991px) {
+
+    /* Navbar tweaks untuk mobile */
+    .navbar-collapse {
+        background-color: var(--primary-dark);
+        padding: 1rem;
+        border-radius: 8px;
+        margin-top: 10px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-nav .nav-link {
+        margin: 0.5rem 0;
+        padding: 0.8rem 1rem !important;
+    }
+
+    .dropdown-menu {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        box-shadow: none;
+    }
+
+    .dropdown-submenu>.dropdown-menu {
+        position: static;
+        display: none;
+        padding-left: 1rem;
+    }
+
+    .dropdown-submenu:hover>.dropdown-menu,
+    .dropdown-submenu:focus-within>.dropdown-menu {
+        display: block;
+    }
+}
+
 @media (max-width: 768px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
     .hero-content h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
 
     .hero-content p {
@@ -536,12 +584,24 @@ footer {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .news-grid {
-        grid-template-columns: 1fr;
+    /* Penyesuaian modal dan tabel di layar kecil */
+    .modal-dialog {
+        margin: 0.5rem;
     }
 
-    .navbar-nav .nav-link {
-        margin: 0 0.5rem;
+    .card-body h5,
+    .card-body h3 {
+        font-size: 1.2rem;
+    }
+
+    .dataTables_wrapper .dataTables_filter input {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
+
+    .dataTables_wrapper .dataTables_length select {
+        width: auto;
     }
 }
 
@@ -551,18 +611,44 @@ footer {
     }
 
     .hero-content h1 {
-        font-size: 1.5rem;
-    }
-
-    .btn {
-        padding: 10px 20px;
-        font-size: 0.9rem;
+        font-size: 1.8rem;
     }
 
     .section-title {
         font-size: 1.8rem;
     }
+
+    .masjid-name {
+        font-size: 1.4rem;
+    }
+
+    .fa-mosque.fa-2x {
+        font-size: 1.5em;
+    }
+
+    /* Perkecil logo icon di mobile */
+    .navbar-brand {
+        margin-left: 0.5rem;
+    }
+
+    /* Penyesuaian padding card pada halaman input */
+    .card-body {
+        padding: 1rem;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .d-flex.justify-content-between.align-items-center {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 1rem;
+    }
+
+    div.dataTables_wrapper div.dataTables_paginate {
+        text-align: center;
+        margin-top: 1rem;
+    }
 }
-
-
-

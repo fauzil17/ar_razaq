@@ -2,7 +2,7 @@
 $host = "localhost";
 $user = "root";        // default XAMPP / Laragon
 $pass = "";            // kosongkan jika default
-$db   = "ar_razaq";   // GANTI sesuai nama database kamu
+$db   = "masjid_fauzil";   // GANTI sesuai nama database kamu
 
 $conn = mysqli_connect($host, $user, $pass, $db);
 

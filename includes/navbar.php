@@ -18,9 +18,9 @@ $base_path = rtrim($base_path, '/\\');
 <nav class="navbar navbar-expand-lg" style="background-color: #2563eb;">
     <div class="container-fluid">
         <!-- Logo -->
-        <a class="navbar-brand d-flex ms-5">
-            <img src="<?php echo $base_path; ?>/assets/images/logoo.png" alt="Logo Masjid" width="60" height="60" class="rounded-circle me-2 ">
-            <!-- <span>Masjid Kami</span> -->
+        <a class="navbar-brand d-flex ms-5" href="<?php echo $base_path; ?>/index.php">
+            <i class="fas fa-mosque fa-2x me-2 text-white"></i>
+            <span class="masjid-name">ar razaq</span>
         </a>
 
         <!-- Hamburger Toggle -->
