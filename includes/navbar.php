@@ -47,64 +47,55 @@ $base_path = rtrim($base_path, '/\\');
                     <a class="nav-link" href="<?php echo $base_path; ?>/pages/berita.php">Berita</a>
                 </li>
                 <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" role="button"
-       data-bs-toggle="dropdown" aria-expanded="false">
-        Kas
-    </a>
 
-    <ul class="dropdown-menu">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="kasDropdown" role="button"
+                      data-bs-toggle="dropdown" aria-expanded="false">
+                         Kas
+                  </a>
+
+                 <ul class="dropdown-menu" aria-labelledby="kasDropdown">
 
         <!-- KAS MASJID -->
-        <li class="dropdown-submenu">
-            <a class="dropdown-item dropdown-toggle" href="#">
-                Kas Masjid
+        <li class="dropdown-header">Kas Masjid</li>
+        <li>
+            <a class="dropdown-item" href="<?php echo $base_path; ?>/pages/kas-harian.php">
+                Input Kas Harian
             </a>
-            <ul class="dropdown-menu">
-                <li>
-                    <a class="dropdown-item" href="<?php echo $base_path; ?>/pages/kas-harian.php">
-                        Input Kas Harian
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="<?php echo $base_path; ?>/pages/kas-jumat.php">
-                        Input Kas Jum'at
-                    </a>
-                </li>
-            </ul>
+        </li>
+        <li>
+            <a class="dropdown-item" href="<?php echo $base_path; ?>/pages/kas-jumat.php">
+                Input Kas Jum'at
+            </a>
         </li>
 
         <li><hr class="dropdown-divider"></li>
 
         <!-- ZAKAT & INFAK -->
-        <li class="dropdown-submenu">
-            <a class="dropdown-item dropdown-toggle" href="#">
-                Kas Zakat & Infak
+        <li class="dropdown-header">Kas Zakat & Infak</li>
+        <li>
+            <a class="dropdown-item" href="<?php echo $base_path; ?>/pages/zakat.php">
+                Zakat
             </a>
-            <ul class="dropdown-menu">
-                <li>
-                    <a class="dropdown-item" href="<?php echo $base_path; ?>/pages/zakat.php">
-                         Zakat
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="<?php echo $base_path; ?>/pages/infak.php">
-                        Infak
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="<?php echo $base_path; ?>/pages/penyaluran.php">
-                        Penyaluran
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="<?php echo $base_path; ?>/pages/laporan.php">
-                        Laporan
-                    </a>
-                </li>
-            </ul>
+        </li>
+        <li>
+            <a class="dropdown-item" href="<?php echo $base_path; ?>/pages/infak.php">
+                Infak
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item" href="<?php echo $base_path; ?>/pages/penyaluran.php">
+                Penyaluran
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item" href="<?php echo $base_path; ?>/pages/laporan.php">
+                Laporan
+            </a>
         </li>
 
     </ul>
+</li>
 </li>
 
                 <li class="nav-item dropdown">

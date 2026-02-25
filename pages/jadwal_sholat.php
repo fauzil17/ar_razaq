@@ -1,5 +1,23 @@
 <?php
+$hari_ini = date('l'); // Mendapatkan nama hari (Friday, Monday, dll)
 session_start();
+
+// Set timezone Indonesia
+date_default_timezone_set("Asia/Makassar"); // Sesuaikan (Makassar untuk NTT)
+
+// Ambil tanggal hari ini
+$tanggal = date("d-m-Y");
+
+// Ambil data dari API (ganti kota sesuai lokasi masjid Anda)
+$kota = "Ende";
+$negara = "Indonesia";
+
+$url = "https://api.aladhan.com/v1/timingsByCity?city=$kota&country=$negara&method=11";
+
+$response = file_get_contents($url);
+$data = json_decode($response, true);
+
+$jadwal = $data['data']['timings'];
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -31,49 +49,58 @@ session_start();
 
             <h1 class="section-title">Jadwal Sholat Hari Ini</h1>
             
-            <div class="row">
-                <div class="col-md-4 mb-3">
-                    <div class="prayer-card">
-                        <h3>Subuh</h3>
-                        <p class="time">04:30</p>
-                        <p class="text-muted">Jangan lewatkan sholat Subuh</p>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="prayer-card">
-                        <h3>Dzuhur</h3>
-                        <p class="time">12:15</p>
-                        <p class="text-muted">Waktu istirahat siang</p>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="prayer-card">
-                        <h3>Ashar</h3>
-                        <p class="time">15:45</p>
-                        <p class="text-muted">Sore hari</p>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="prayer-card">
-                        <h3>Maghrib</h3>
-                        <p class="time">18:05</p>
-                        <p class="text-muted">Setelah matahari terbenam</p>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="prayer-card">
-                        <h3>Isya</h3>
-                        <p class="time">19:30</p>
-                        <p class="text-muted">Malam hari</p>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="prayer-card">
-                        <h3>Jumat</h3>
-                        <p class="time">12:00</p>
-                        <p class="text-muted">Khutbah dimulai lebih awal</p>
-                    </div>
-                </div>
+            <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6 justify-content-center">
+
+                       <div class="col mb-3">
+                           <div class="prayer-card small-card">
+                               <h3>Subuh</h3>
+                               <p class="time"><?php echo $jadwal['Fajr']; ?></p>
+                               <p class="text-muted">Jangan lewatkan sholat Subuh</p>
+                           </div>
+                       </div>
+
+                       <div class="col mb-3">
+                           <div class="prayer-card small-card">
+                               <h3>Dzuhur</h3>
+                               <p class="time"><?php echo $jadwal['Dhuhr']; ?></p>
+                               <p class="text-muted">Jangan lewatkan sholat Dzuhur</p>
+                           </div>
+                       </div>
+
+                       <div class="col mb-3">
+                           <div class="prayer-card small-card">
+                               <h3>Ashar</h3>
+                               <p class="time"><?php echo $jadwal['Asr']; ?></p>
+                               <p class="text-muted">Jangan lewatkan sholat Ashar</p>
+                           </div>
+                       </div>
+
+                       <div class="col mb-3">
+                           <div class="prayer-card small-card">
+                               <h3>Maghrib</h3>
+                               <p class="time"><?php echo $jadwal['Maghrib']; ?></p>
+                               <p class="text-muted">Jangan lewatkan sholat Maghrib</p>
+                           </div>
+                       </div>
+
+                      <div class="col mb-3">
+                           <div class="prayer-card small-card">
+                               <h3>Isya</h3>
+                               <p class="time"><?php echo $jadwal['Isha']; ?></p>
+                               <p class="text-muted">Jangan lewatkan sholat Isya</p>
+                           </div>
+                       </div>
+
+                       <?php if ($hari_ini == "Friday"): ?>
+                       <div class="col mb-3">
+                           <div class="prayer-card small-card">
+                               <h3>Jumat</h3>
+                               <p class="time"><?php echo $jadwal['Dhuhr']; ?></p>
+                               <p class="text-muted">Khutbah dimulai sebelum Dzuhur</p>
+                           </div>
+                       </div>
+                       <?php endif; ?>
+
             </div>
 
             <div class="row mt-5">

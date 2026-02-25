@@ -346,8 +346,13 @@ h6 {
     transition: all 0.3s ease;
     border-top: 5px solid var(--primary-color);
     border-bottom: 5px solid transparent;
-}
 
+    /* Tambahan agar responsive sempurna */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 .prayer-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.15);
@@ -653,6 +658,27 @@ footer a:hover {
     }
 
    
+   .small-card {
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 14px;
+}
 
+.small-card h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.small-card .time {
+    font-size: 28px;   /* sebelumnya mungkin 40+ */
+    font-weight: bold;
+    color: #2563eb;
+    margin-bottom: 5px;
+}
+
+.small-card .text-muted {
+    font-size: 12px;
+}
 
 }
