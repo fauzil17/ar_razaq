@@ -89,7 +89,7 @@ session_start();
             <div class="text-center mt-5">
                 <h3>Dokumentasi Lebih Lanjut</h3>
                 <p>Untuk melihat dokumentasi kegiatan masjid yang lebih lengkap, Anda bisa mengunjungi media sosial kami.</p>
-                <div class="social-links">
+                <div class="social-links mb-4">
                     <a href="#" class="btn btn-info btn-sm me-2"><i class="fab fa-facebook"></i> Facebook</a>
                     <a href="https://www.instagram.com/masjidarrazzaqgeliting/" 
                               class="btn btn-info btn-sm me-2" 
