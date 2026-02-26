@@ -1,5 +1,4 @@
 <?php
-include '../includes/auth_admin.php'; 
 session_start();
 ?>
 <!DOCTYPE html>

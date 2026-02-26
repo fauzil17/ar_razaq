@@ -55,7 +55,7 @@ $jadwal = $data['data']['timings'];
                            <div class="prayer-card small-card">
                                <h3>Subuh</h3>
                                <p class="time"><?php echo $jadwal['Fajr']; ?></p>
-                               <p class="text-muted">Jangan lewatkan sholat Subuh</p>
+                               <p class="text-muted">Awali hari dengan sujud syukur</p>
                            </div>
                        </div>
 
@@ -63,7 +63,7 @@ $jadwal = $data['data']['timings'];
                            <div class="prayer-card small-card">
                                <h3>Dzuhur</h3>
                                <p class="time"><?php echo $jadwal['Dhuhr']; ?></p>
-                               <p class="text-muted">Jangan lewatkan sholat Dzuhur</p>
+                               <p class="text-muted">Rehat sejenak, tenangkan jiwa</p>
                            </div>
                        </div>
 
@@ -71,7 +71,7 @@ $jadwal = $data['data']['timings'];
                            <div class="prayer-card small-card">
                                <h3>Ashar</h3>
                                <p class="time"><?php echo $jadwal['Asr']; ?></p>
-                               <p class="text-muted">Jangan lewatkan sholat Ashar</p>
+                               <p class="text-muted">Sempurnakan hari dengan doa</p>
                            </div>
                        </div>
 
@@ -79,7 +79,7 @@ $jadwal = $data['data']['timings'];
                            <div class="prayer-card small-card">
                                <h3>Maghrib</h3>
                                <p class="time"><?php echo $jadwal['Maghrib']; ?></p>
-                               <p class="text-muted">Jangan lewatkan sholat Maghrib</p>
+                               <p class="text-muted">Syukuri sisa hari di waktu senja</p>
                            </div>
                        </div>
 
@@ -87,7 +87,7 @@ $jadwal = $data['data']['timings'];
                            <div class="prayer-card small-card">
                                <h3>Isya</h3>
                                <p class="time"><?php echo $jadwal['Isha']; ?></p>
-                               <p class="text-muted">Jangan lewatkan sholat Isya</p>
+                               <p class="text-muted">Tutup hari dalam damai Illahi</p>
                            </div>
                        </div>
 

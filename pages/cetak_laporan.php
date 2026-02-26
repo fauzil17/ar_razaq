@@ -87,13 +87,13 @@ $html = '
 
 <div class="header">
     <h1>MASJID AR-RAZAQ</h1>
-    <p>Jl. Contoh Alamat Masjid No. 123, Kota Anda, Provinsi</p>
+    <p>Jl. Trans Maumere - Larantuka, Sikka, NTT, Kode Pos :86182</p>
     <p>Laporan Resmi Keuangan Masjid</p>
 </div>
 ';
 
 if ($jenis == 'kas') {
-    $html .= '<div class="title">Laporan Kas Masjid (Harian & Jum\'at)</div>';
+    $html .= '<div class="title">Laporan Kas Masjid Ar-Razaq(Harian & Jum\'at)</div>';
     $html .= '<div class="periode">Periode: ' . $tgl_mulai . ' s/d ' . $tgl_sampai . '</div>';
     
     $html .= '<table>
@@ -314,7 +314,7 @@ if ($jenis == 'kas') {
 
 $html .= '
     <div style="margin-top: 50px; text-align: right; font-size: 11px;">
-        <p>Kota Anda, '.date('d M Y').'<br>Mengetahui,</p>
+        <p>Maumere, '.date('d M Y').'<br>Mengetahui,</p>
         <br><br><br>
         <p>_______________________<br><b>Ketua Takmir Masjid</b></p>
     </div>
