@@ -1,31 +1,97 @@
 <?php
 session_start();
 date_default_timezone_set("Asia/Makassar");
-
 include '../config/koneksi.php';
 
-/* ================= API JADWAL SHOLAT ================= */
-$hari_ini = date('l');
-$tanggal = date("d-m-Y");
+/* ================= AUTO GENERATE JADWAL 1 TAHUN ================= */
 
-$kota = "Ende";
-$negara = "Indonesia";
+$tahun_sekarang = date("Y");
+$tanggal_awal_tahun = $tahun_sekarang . "-01-01";
 
-$url = "https://api.aladhan.com/v1/timingsByCity?city=$kota&country=$negara&method=11";
-$response = file_get_contents($url);
-$data_api = json_decode($response, true);
-$jadwal = $data_api['data']['timings'];
+/* Cek apakah tanggal 1 Januari sudah ada */
+$cek_tanggal_awal = $conn->prepare("SELECT id FROM jadwal_sholat WHERE tanggal=?");
+$cek_tanggal_awal->bind_param("s", $tanggal_awal_tahun);
+$cek_tanggal_awal->execute();
+$cek_awal = $cek_tanggal_awal->get_result();
+
+if ($cek_awal->num_rows == 0) {
+
+    $kota = "Ende";
+    $negara = "Indonesia";
+
+    for ($bulan = 1; $bulan <= 12; $bulan++) {
+
+        $url = "https://api.aladhan.com/v1/calendarByCity?city=$kota&country=$negara&method=11&month=$bulan&year=$tahun_sekarang";
+        $response = @file_get_contents($url);
+
+        if ($response === false) continue;
+
+        $data_api = json_decode($response, true);
+        if (!isset($data_api['data'])) continue;
+
+        foreach ($data_api['data'] as $hari) {
+
+            $tanggal_format = date("Y-m-d", strtotime($hari['date']['gregorian']['date']));
+
+            $subuh   = substr($hari['timings']['Fajr'], 0, 5);
+$dzuhur  = substr($hari['timings']['Dhuhr'], 0, 5);
+$ashar   = substr($hari['timings']['Asr'], 0, 5);
+$maghrib = substr($hari['timings']['Maghrib'], 0, 5);
+$isya    = substr($hari['timings']['Isha'], 0, 5);
+
+            $stmt = $conn->prepare("INSERT IGNORE INTO jadwal_sholat 
+                (tanggal, subuh, dzuhur, ashar, maghrib, isya) 
+                VALUES (?, ?, ?, ?, ?, ?)");
+
+            $stmt->bind_param("ssssss",
+                $tanggal_format,
+                $subuh,
+                $dzuhur,
+                $ashar,
+                $maghrib,
+                $isya
+            );
+
+            $stmt->execute();
+        }
+    }
+}
+
+/* ================= AMBIL JADWAL HARI INI ================= */
+
+$tanggal_hari_ini = date("Y-m-d");
+$hari_ini = date("l");
+
+$stmt_today = $conn->prepare("SELECT * FROM jadwal_sholat WHERE tanggal=?");
+$stmt_today->bind_param("s", $tanggal_hari_ini);
+$stmt_today->execute();
+$jadwal_db = $stmt_today->get_result()->fetch_assoc();
+
+/* Pengaman jika kosong */
+if (!$jadwal_db) {
+    $jadwal_db = [
+        'subuh' => '--:--',
+        'dzuhur' => '--:--',
+        'ashar' => '--:--',
+        'maghrib' => '--:--',
+        'isya' => '--:--'
+    ];
+}
+
+$jadwal = [
+    "Fajr" => substr($jadwal_db['subuh'], 0, 5),
+    "Dhuhr" => substr($jadwal_db['dzuhur'], 0, 5),
+    "Asr" => substr($jadwal_db['ashar'], 0, 5),
+    "Maghrib" => substr($jadwal_db['maghrib'], 0, 5),
+    "Isha" => substr($jadwal_db['isya'], 0, 5)
+];
 
 /* ================= CRUD INFORMASI ================= */
 
 // TAMBAH
 if (isset($_POST['tambah'])) {
-    $judul = $_POST['judul'];
-    $lokasi = $_POST['lokasi'];
-    $deskripsi = $_POST['deskripsi'];
-
     $stmt = $conn->prepare("INSERT INTO informasi (judul, lokasi, deskripsi) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $judul, $lokasi, $deskripsi);
+    $stmt->bind_param("sss", $_POST['judul'], $_POST['lokasi'], $_POST['deskripsi']);
     $stmt->execute();
     header("Location: jadwal_sholat.php");
     exit;
@@ -33,13 +99,8 @@ if (isset($_POST['tambah'])) {
 
 // EDIT
 if (isset($_POST['edit'])) {
-    $id = $_POST['id'];
-    $judul = $_POST['judul'];
-    $lokasi = $_POST['lokasi'];
-    $deskripsi = $_POST['deskripsi'];
-
     $stmt = $conn->prepare("UPDATE informasi SET judul=?, lokasi=?, deskripsi=? WHERE id=?");
-    $stmt->bind_param("sssi", $judul, $lokasi, $deskripsi, $id);
+    $stmt->bind_param("sssi", $_POST['judul'], $_POST['lokasi'], $_POST['deskripsi'], $_POST['id']);
     $stmt->execute();
     header("Location: jadwal_sholat.php");
     exit;
@@ -48,20 +109,25 @@ if (isset($_POST['edit'])) {
 // HAPUS
 if (isset($_GET['hapus'])) {
     $id = intval($_GET['hapus']);
-    $conn->query("DELETE FROM informasi WHERE id=$id");
+    $stmt = $conn->prepare("DELETE FROM informasi WHERE id=?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
     header("Location: jadwal_sholat.php");
     exit;
 }
 
 /* ================= PAGINATION ================= */
+
 $batas = 3;
 $halaman = isset($_GET['halaman']) ? (int)$_GET['halaman'] : 1;
 $halaman_awal = ($halaman > 1) ? ($halaman * $batas) - $batas : 0;
 
-$total_data = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM informasi"));
+$total_data = $conn->query("SELECT COUNT(*) as total FROM informasi")
+                    ->fetch_assoc()['total'];
+
 $total_halaman = ceil($total_data / $batas);
 
-$data = mysqli_query($conn, "SELECT * FROM informasi ORDER BY id DESC LIMIT $halaman_awal, $batas");
+$data = $conn->query("SELECT * FROM informasi ORDER BY id DESC LIMIT $halaman_awal, $batas");
 ?>
 
 <!DOCTYPE html>
@@ -90,45 +156,33 @@ $data = mysqli_query($conn, "SELECT * FROM informasi ORDER BY id DESC LIMIT $hal
 
 <h1 class="section-title">Jadwal Sholat Hari Ini</h1>
 
-<!-- ================= JADWAL SHOLAT ================= -->
-
 <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 justify-content-center">
 
 <?php
 $prayers = [
-    "Subuh" => $jadwal['Fajr'],
-    "Dzuhur" => $jadwal['Dhuhr'],
-    "Ashar" => $jadwal['Asr'],
-    "Maghrib" => $jadwal['Maghrib'],
-    "Isya" => $jadwal['Isha']
+    "Subuh" => ["waktu" => $jadwal['Fajr']],
+    "Dzuhur" => ["waktu" => $jadwal['Dhuhr']],
+    "Ashar" => ["waktu" => $jadwal['Asr']],
+    "Maghrib" => ["waktu" => $jadwal['Maghrib']],
+    "Isya" => ["waktu" => $jadwal['Isha']]
 ];
 
-foreach ($prayers as $nama => $waktu):
+if ($hari_ini == "Friday") {
+    $prayers["Jumat"] = ["waktu" => $jadwal['Dhuhr']];
+}
+
+foreach ($prayers as $nama => $data_sholat):
 ?>
 
 <div class="col mb-3">
 <div class="prayer-card small-card">
 <h3><?= $nama; ?></h3>
-<p class="time"><?= $waktu; ?></p>
-<p class="text-muted">Semoga Allah menerima ibadah kita</p>
+<p class="time"><?= $data_sholat['waktu']; ?></p>
 </div>
 </div>
 
 <?php endforeach; ?>
-
-<?php if ($hari_ini == "Friday"): ?>
-<div class="col mb-3">
-<div class="prayer-card small-card">
-<h3>Jumat</h3>
-<p class="time"><?= $jadwal['Dhuhr']; ?></p>
-<p class="text-muted">Khutbah dimulai sebelum Dzuhur</p>
 </div>
-</div>
-<?php endif; ?>
-
-</div>
-
-<!-- ================= INFORMASI MASJID ================= -->
 
 <div class="row mt-5">
 <div class="col-md-6">
@@ -140,8 +194,7 @@ foreach ($prayers as $nama => $waktu):
 </button>
 </div>
 
-<?php while ($row = mysqli_fetch_assoc($data)) : ?>
-
+<?php while ($row = $data->fetch_assoc()) : ?>
 <div class="card shadow-sm border-0 mb-3">
 <div class="card-body d-flex justify-content-between">
 <div>
@@ -161,33 +214,8 @@ foreach ($prayers as $nama => $waktu):
 </div>
 </div>
 </div>
-
-<!-- MODAL EDIT -->
-<div class="modal fade" id="editModal<?= $row['id']; ?>">
-<div class="modal-dialog">
-<div class="modal-content">
-<form method="POST">
-<input type="hidden" name="id" value="<?= $row['id']; ?>">
-<div class="modal-header">
-<h5>Edit Informasi</h5>
-<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-</div>
-<div class="modal-body">
-<input type="text" name="judul" value="<?= $row['judul']; ?>" class="form-control mb-3" required>
-<input type="text" name="lokasi" value="<?= $row['lokasi']; ?>" class="form-control mb-3" required>
-<textarea name="deskripsi" class="form-control" rows="4" required><?= $row['deskripsi']; ?></textarea>
-</div>
-<div class="modal-footer">
-<button type="submit" name="edit" class="btn btn-warning">Update</button>
-</div>
-</form>
-</div>
-</div>
-</div>
-
 <?php endwhile; ?>
 
-<!-- PAGINATION -->
 <nav>
 <ul class="pagination justify-content-center mt-3">
 <?php for ($x = 1; $x <= $total_halaman; $x++) : ?>
@@ -214,28 +242,6 @@ foreach ($prayers as $nama => $waktu):
 </div>
 </div>
 </section>
-
-<!-- MODAL TAMBAH -->
-<div class="modal fade" id="tambahModal">
-<div class="modal-dialog">
-<div class="modal-content">
-<form method="POST">
-<div class="modal-header">
-<h5>Tambah Informasi</h5>
-<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-</div>
-<div class="modal-body">
-<input type="text" name="judul" class="form-control mb-3" placeholder="Judul Informasi" required>
-<input type="text" name="lokasi" class="form-control mb-3" placeholder="Lokasi / Tempat Kegiatan" required>
-<textarea name="deskripsi" class="form-control" rows="4" placeholder="Deskripsi Informasi" required></textarea>
-</div>
-<div class="modal-footer">
-<button type="submit" name="tambah" class="btn btn-success">Simpan</button>
-</div>
-</form>
-</div>
-</div>
-</div>
 
 <?php include '../includes/footer.php'; ?>
 
